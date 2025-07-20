@@ -10,7 +10,7 @@ var gestorben: bool = false;
 func _ready():
 	$SpielerSprite.animation_finished.connect(_animation_fertig)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Global.tot and gestorben == false:
 		$SpielerSprite.play("sterben")
 		gestorben = true;

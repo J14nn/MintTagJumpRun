@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://k6f618c6kr80"]
+[gd_scene load_steps=12 format=3 uid="uid://k6f618c6kr80"]
 
 [ext_resource type="Texture2D" uid="uid://ck5umemocifft" path="res://Assets/4 Animated objects/Chest.png" id="1_5p6l5"]
 [ext_resource type="Script" uid="uid://by48t67kw25ak" path="res://hinweis_truhe.gd" id="1_e5unk"]
+[ext_resource type="Script" uid="uid://ditrggk4dlid4" path="res://hint.gd" id="3_40sv7"]
+[ext_resource type="Texture2D" uid="uid://cvcjxlhti2840" path="res://Assets/UI/1 Frames/Frame1.png" id="3_jlqde"]
+[ext_resource type="FontFile" uid="uid://cyrnd5fuic7ad" path="res://Assets/UI/6 Font/CraftPixNet Survival Kit.otf" id="3_xgdyu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e5unk"]
 size = Vector2(26, 16)
@@ -53,4 +56,38 @@ shape = SubResource("RectangleShape2D_e5unk")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5xpb4")
 
+[node name="Hint" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = -66.0
+offset_right = 85.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jlqde")
+script = ExtResource("3_40sv7")
+
+[node name="HintText" type="RichTextLabel" parent="Hint"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -18.5
+offset_right = 71.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_xgdyu")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

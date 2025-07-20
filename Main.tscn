@@ -550,11 +550,12 @@ position = Vector2(396, 636)
 metadata/_edit_lock_ = true
 
 [node name="HinweisTruhe" parent="Hinweise" instance=ExtResource("7_lgr22")]
-position = Vector2(108, 516)
-scale = Vector2(-1, 1)
+position = Vector2(113, 516)
+LabelText = "in Spieler-var sprung_hoehe: float = -150"
 
 [node name="HinweisTruhe22" parent="Hinweise" instance=ExtResource("7_lgr22")]
 position = Vector2(113, 644)
+LabelText = "in Slime - var Leben: int = 1"
 
 [node name="Spieler" parent="." instance=ExtResource("2_uu6xs")]
 position = Vector2(222, 637)

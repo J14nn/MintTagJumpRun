@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Gegner
 
-var Leben: int = 1000000000
+var Leben: int = 10000000
 var Geschwindigkeit: float = 10
 var angriff: bool = false
 var laufen: bool = true
