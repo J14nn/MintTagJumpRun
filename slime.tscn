@@ -171,6 +171,7 @@ size = Vector2(54, 25)
 script = ExtResource("1_2002g")
 
 [node name="SlimeSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ncgp5")
 animation = &"angreifen"
 frame = 3
