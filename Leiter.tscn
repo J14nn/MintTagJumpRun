@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnutsxqniqwva"]
+
+[ext_resource type="Script" uid="uid://dby0f7i64h55v" path="res://leiter.gd" id="1_bt0vo"]
+[ext_resource type="Texture2D" uid="uid://b2d7k35em0klx" path="res://Assets/3 Objects/4 Ladder/2.png" id="2_apucc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pl7s5"]
+size = Vector2(21, 79)
+
+[node name="Leiter" type="Area2D"]
+script = ExtResource("1_bt0vo")
+
+[node name="LeiterKollision" type="CollisionShape2D" parent="."]
+position = Vector2(4.5, -23.5)
+shape = SubResource("RectangleShape2D_pl7s5")
+
+[node name="SpielerSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(5, -23.5)
+scale = Vector2(0.6875, 2.46875)
+texture = ExtResource("2_apucc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
