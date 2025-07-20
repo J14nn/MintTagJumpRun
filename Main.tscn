@@ -547,6 +547,7 @@ scale = Vector2(0.680429, 0.934662)
 position = Vector2(396, 636)
 
 [node name="Hinweise" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="HinweisTruhe" parent="Hinweise" instance=ExtResource("7_lgr22")]
 position = Vector2(108, 516)
@@ -558,6 +559,7 @@ position = Vector2(113, 644)
 [node name="Spieler" parent="." instance=ExtResource("2_uu6xs")]
 position = Vector2(222, 637)
 metadata/locked_permanently = true
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Spieler"]
 position = Vector2(14, 2)
@@ -566,3 +568,4 @@ zoom = Vector2(4.5, 4.5)
 
 [node name="Ziel" parent="." instance=ExtResource("8_trn2v")]
 position = Vector2(1880, 56)
+metadata/_edit_lock_ = true
