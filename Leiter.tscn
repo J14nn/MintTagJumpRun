@@ -4,21 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://b2d7k35em0klx" path="res://Assets/3 Objects/4 Ladder/2.png" id="2_apucc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pl7s5"]
-size = Vector2(21, 79)
+size = Vector2(22, 63)
 
 [node name="Leiter" type="Area2D"]
 script = ExtResource("1_bt0vo")
 
 [node name="LeiterKollision" type="CollisionShape2D" parent="."]
-position = Vector2(4.5, -23.5)
+position = Vector2(4, -25.5)
 shape = SubResource("RectangleShape2D_pl7s5")
 
 [node name="SpielerSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(5, -23.5)
-scale = Vector2(0.6875, 2.46875)
+position = Vector2(4, -28)
+scale = Vector2(0.6875, 1.03125)
 texture = ExtResource("2_apucc")
+region_enabled = true
+region_rect = Rect2(0, 0.005, 32, 66.465)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

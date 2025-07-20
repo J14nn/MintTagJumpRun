@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://coki02cmh7mjo"]
+
+[ext_resource type="Script" uid="uid://4wnndck5j173" path="res://stacheln.gd" id="1_7dt5p"]
+[ext_resource type="Texture2D" uid="uid://fuopc7ftgn11" path="res://Assets/3 Objects/5 Spikes/5.png" id="1_k432r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5n6l"]
+size = Vector2(20, 2)
+
+[node name="Stachel" type="Area2D"]
+script = ExtResource("1_7dt5p")
+
+[node name="StachelnKollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i5n6l")
+
+[node name="StachelnSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-4.76837e-07, 0)
+scale = Vector2(0.166815, 0.166667)
+texture = ExtResource("1_k432r")
+region_enabled = true
+region_rect = Rect2(1, 1, 120.08, 13)
+region_filter_clip_enabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

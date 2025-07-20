@@ -2,14 +2,25 @@ extends CharacterBody2D
 
 @export var geschwindigkeit: float = 150
 @export var gravitation: float = 200
-@export var sprung_hoehe: float = -150
+@export var sprung_hoehe: float = -50
 
 var angriffs_index: int = 0 
+var gestorben: bool = false;
 
 func _ready():
 	$SpielerSprite.animation_finished.connect(_animation_fertig)
+	
+func _process(delta: float) -> void:
+	if Global.tot and gestorben == false:
+		$SpielerSprite.play("sterben")
+		gestorben = true;
 
 func _physics_process(delta):
+	if Global.tot:
+		velocity.y = 10
+		move_and_slide()
+		return
+		
 	var y = gravitation * delta
 	velocity.y += y
 
@@ -27,8 +38,12 @@ func _physics_process(delta):
 		Global.springt = false
 
 func _input(event):
+	if Global.tot:
+		return
+		
 	if event.is_action_pressed("ui_attack") and is_on_floor() and not Global.angreift:
 		Global.angreift = true
+		$AngriffKollision.monitoring = true
 
 		if angriffs_index == 0:
 			$SpielerSprite.play("angreifen_1")
@@ -38,6 +53,8 @@ func _input(event):
 		angriffs_index = 1 - angriffs_index
 
 	if event.is_action_pressed("ui_jump") and is_on_floor():
+		if sprung_hoehe < -100:
+			sprung_hoehe = -150
 		velocity.y = sprung_hoehe
 		Global.springt = true
 		$SpielerSprite.play("springen")
@@ -75,6 +92,13 @@ func spieler_animation():
 func _animation_fertig():
 	var anim = $SpielerSprite.animation
 	if anim == "angreifen_1" or anim == "angreifen_2":
+		$AngriffKollision.monitoring = false
 		Global.angreift = false
 	if anim == "klettern_hinten" or anim == "klettern_seite":
 		Global.klettert = false
+
+
+func _on_angriff_kollision_body_entered(body: Node2D) -> void:
+	if Global.angreift and body.is_in_group("Gegner"):
+		Global.getroffen = body
+		

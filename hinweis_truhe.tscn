@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://k6f618c6kr80"]
+
+[ext_resource type="Texture2D" uid="uid://ck5umemocifft" path="res://Assets/4 Animated objects/Chest.png" id="1_5p6l5"]
+[ext_resource type="Script" uid="uid://by48t67kw25ak" path="res://hinweis_truhe.gd" id="1_e5unk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5unk"]
+size = Vector2(26, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgdyu"]
+atlas = ExtResource("1_5p6l5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40sv7"]
+atlas = ExtResource("1_5p6l5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlqde"]
+atlas = ExtResource("1_5p6l5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soe6w"]
+atlas = ExtResource("1_5p6l5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5xpb4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgdyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40sv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlqde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soe6w")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HinweisTruhe" type="Area2D"]
+script = ExtResource("1_e5unk")
+
+[node name="TruheKollision" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 8)
+shape = SubResource("RectangleShape2D_e5unk")
+
+[node name="TruheSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5xpb4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
