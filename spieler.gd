@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 var angriffs_index: int = 0 
 var gestorben: bool = false;
+var gegner_im_bereich: Array[Node2D] = []
 
 func _ready():
 	$SpielerSprite.animation_finished.connect(_animation_fertig)
@@ -14,6 +15,11 @@ func _process(_delta: float) -> void:
 	if Global.tot and gestorben == false:
 		$SpielerSprite.play("sterben")
 		gestorben = true;
+	if Global.angreift:
+		for gegner in gegner_im_bereich:
+			if not Global.gegner_getroffen.has(gegner):
+				Global.gegner_getroffen.append((gegner))
+				gegner_im_bereich.erase(gegner)
 
 func _physics_process(delta):
 	if Global.tot:
@@ -92,13 +98,17 @@ func spieler_animation():
 func _animation_fertig():
 	var anim = $SpielerSprite.animation
 	if anim == "angreifen_1" or anim == "angreifen_2":
-		$AngriffKollision.monitoring = false
 		Global.angreift = false
 	if anim == "klettern_hinten" or anim == "klettern_seite":
 		Global.klettert = false
 
 
 func _on_angriff_kollision_body_entered(body: Node2D) -> void:
-	if Global.angreift and body.is_in_group("Gegner"):
-		Global.getroffen = body
+	if body.is_in_group("Gegner") and not gegner_im_bereich.has(body):
+		gegner_im_bereich.append(body)
 		
+
+
+func _on_angriff_kollision_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Gegner") and gegner_im_bereich.has(body):
+		gegner_im_bereich.erase(body)
