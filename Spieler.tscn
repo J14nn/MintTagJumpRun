@@ -249,6 +249,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cmr0y"]
+radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aohgu"]
 size = Vector2(23, 29)
@@ -260,9 +261,7 @@ script = ExtResource("1_aohgu")
 texture_filter = 1
 position = Vector2(14, 4)
 sprite_frames = SubResource("SpriteFrames_1mtup")
-animation = &"angreifen_1"
-frame = 4
-frame_progress = 1.0
+animation = &"stehen"
 
 [node name="SpielerKollision" type="CollisionShape2D" parent="."]
 position = Vector2(14, 7)

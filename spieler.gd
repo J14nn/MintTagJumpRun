@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var geschwindigkeit: float = 150
 @export var gravitation: float = 200
-@export var sprung_hoehe: float = -50
+@export var sprung_hoehe: float = -160
 
 var angriffs_index: int = 0 
 var gestorben: bool = false;
@@ -60,8 +60,8 @@ func _input(event):
 		angriffs_index = 1 - angriffs_index
 
 	if event.is_action_pressed("ui_jump") and is_on_floor():
-		if sprung_hoehe < -100:
-			sprung_hoehe = -150
+		if sprung_hoehe < -130:
+			sprung_hoehe = -130
 		velocity.y = sprung_hoehe
 		Global.springt = true
 		$SpielerSprite.play("springen")
@@ -81,7 +81,11 @@ func _input(event):
 
 func horizontal_bewegung():
 	var horizontal_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	velocity.x = horizontal_input * geschwindigkeit
+	if is_on_floor():
+		velocity.x = horizontal_input * geschwindigkeit
+	else:
+		var air_control_factor = 0.7 
+		velocity.x = horizontal_input * geschwindigkeit * air_control_factor
 
 func spieler_animation():
 

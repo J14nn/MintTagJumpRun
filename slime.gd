@@ -1,12 +1,12 @@
 extends CharacterBody2D
 class_name Gegner
 
-var Leben: int = 10000000
+var Leben: int = 1
 var Geschwindigkeit: float = 10
 var angriff: bool = false
 var laufen: bool = true
 var kriegt_schaden: bool = false
-var flip: bool = false
+var flip: bool = true
 var player_in_range: bool = false
 var pending_attack_check: bool = false
 var player_ref: Node2D = null
