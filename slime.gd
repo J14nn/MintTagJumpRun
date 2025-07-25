@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 		Leben -= 1
 		Global.gegner_getroffen.erase(self)
 		if Leben <= 0:
-			$SlimeKollision.disabled = true
+			$SlimeKollision.queue_free()
 			$SlimeSprite.play("sterben")
 		else:
 			$SlimeSprite.play("schaden")

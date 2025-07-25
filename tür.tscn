@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://o3qecy7acecy"]
+[gd_scene load_steps=13 format=3 uid="uid://o3qecy7acecy"]
 
 [ext_resource type="Script" uid="uid://4wnndck5j173" path="res://stacheln.gd" id="1_4yyhi"]
 [ext_resource type="Texture2D" uid="uid://rublssx2a1rl" path="res://Assets/3 Objects/door/door.png" id="2_tga12"]
 [ext_resource type="Texture2D" uid="uid://dwiqo2g1jcrib" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0000.png" id="3_k3gtk"]
+[ext_resource type="Script" uid="uid://fyrh8pacddpj" path="res://tür_offen_sprite.gd" id="3_w25qd"]
 [ext_resource type="Texture2D" uid="uid://6chh8g0uqpfc" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0001.png" id="4_w25qd"]
 [ext_resource type="Texture2D" uid="uid://c77ycibk3sqs2" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0002.png" id="5_wwjim"]
 [ext_resource type="Texture2D" uid="uid://kxadod1kiew" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0003.png" id="6_m04sa"]
@@ -11,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://crwslrxfpvtt7" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0006.png" id="9_xhe1u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5n6l"]
-size = Vector2(20, 2)
+size = Vector2(12, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8oowp"]
 animations = [{
@@ -45,8 +46,14 @@ animations = [{
 [node name="Tür" type="Area2D"]
 script = ExtResource("1_4yyhi")
 
+[node name="TürBlocker" type="StaticBody2D" parent="."]
+
+[node name="BlockKollision" type="CollisionShape2D" parent="TürBlocker"]
+position = Vector2(-179.5, 174)
+shape = SubResource("RectangleShape2D_i5n6l")
+
 [node name="TürKollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(-180, 174)
 shape = SubResource("RectangleShape2D_i5n6l")
 
 [node name="TürSprite" type="Sprite2D" parent="."]
@@ -67,6 +74,7 @@ scale = Vector2(0.1025, 0.13)
 texture = ExtResource("2_tga12")
 region_enabled = true
 region_rect = Rect2(132, 86, 90, 245)
+script = ExtResource("3_w25qd")
 
 [node name="SchlossSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 3

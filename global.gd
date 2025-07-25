@@ -5,3 +5,4 @@ var springt: bool = false
 var angreift: bool = false
 var gegner_getroffen: Array[Node2D] = []
 var tot: bool = false
+var schlüsselMenge = 0
