@@ -25,7 +25,8 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta):
 	if Global.tot:
-		velocity.y = 10
+		velocity.y = 100
+		velocity.x = 0
 		move_and_slide()
 		return
 	
@@ -117,8 +118,6 @@ func _on_angriff_kollision_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Gegner") and not gegner_im_bereich.has(body):
 		gegner_im_bereich.append(body)
 		
-
-
 func _on_angriff_kollision_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Gegner") and gegner_im_bereich.has(body):
 		gegner_im_bereich.erase(body)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://ckrnx80ohijh8"]
+[gd_scene load_steps=29 format=3 uid="uid://ckrnx80ohijh8"]
 
 [ext_resource type="Texture2D" uid="uid://bej0vtt0nxnom" path="res://Assets/Sprites/4 Bat/Bat_attack.png" id="1_85lnx"]
+[ext_resource type="Script" uid="uid://crgfh2we4qfu8" path="res://fledermaus.gd" id="1_jb64b"]
 [ext_resource type="Texture2D" uid="uid://mmjgv10ahcu2" path="res://Assets/Sprites/4 Bat/Bat_walk.png" id="2_jb64b"]
 [ext_resource type="Texture2D" uid="uid://biw203vi2v1fh" path="res://Assets/Sprites/4 Bat/Bat_hurt.png" id="3_pmqsh"]
 [ext_resource type="Texture2D" uid="uid://bamopugk0rx5n" path="res://Assets/Sprites/4 Bat/Bat_idle.png" id="4_o8rkd"]
@@ -95,7 +96,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"angreifen",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -112,7 +113,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"laufen",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -140,7 +141,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"stehen",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -161,12 +162,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hpv7p"]
-size = Vector2(33, 19)
+size = Vector2(28, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3r674"]
-size = Vector2(23, 25)
+size = Vector2(39, 25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jb64b"]
+radius = 63.0079
 
 [node name="Fledermaus" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_jb64b")
 
 [node name="FledermausSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -176,15 +183,31 @@ frame = 3
 frame_progress = 1.0
 
 [node name="FledermausKollision" type="CollisionShape2D" parent="."]
-position = Vector2(5.5, 8.5)
+position = Vector2(4, 14)
 shape = SubResource("RectangleShape2D_hpv7p")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, 17)
+position = Vector2(4.5, 12)
 shape = SubResource("RectangleShape2D_3r674")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
 autostart = true
+
+[node name="Pause" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="View" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="View"]
+position = Vector2(3, 9)
+shape = SubResource("CircleShape2D_jb64b")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Pause" to="." method="_on_pause_timeout"]
+[connection signal="body_entered" from="View" to="." method="_on_view_body_entered"]
+[connection signal="body_exited" from="View" to="." method="_on_view_body_exited"]

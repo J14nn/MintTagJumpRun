@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://m0oj7iegs5"]
+[gd_scene load_steps=15 format=4 uid="uid://m0oj7iegs5"]
 
 [ext_resource type="Texture2D" uid="uid://rugygb8fh4g6" path="res://Assets/1 Tiles/Assets.png" id="2_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://d2lj5w2df5m2q" path="res://Spieler.tscn" id="2_uu6xs"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://coki02cmh7mjo" path="res://stacheln.tscn" id="4_fos0i"]
 [ext_resource type="PackedScene" uid="uid://o3qecy7acecy" path="res://tür.tscn" id="5_03owx"]
 [ext_resource type="PackedScene" uid="uid://ckefah1p3faiy" path="res://slime.tscn" id="6_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://ckrnx80ohijh8" path="res://fledermaus.tscn" id="7_5vvyt"]
 [ext_resource type="PackedScene" uid="uid://k6f618c6kr80" path="res://hinweis_truhe.tscn" id="7_lgr22"]
 [ext_resource type="PackedScene" uid="uid://b2ycnup3g8e3u" path="res://ziel.tscn" id="8_trn2v"]
 [ext_resource type="Texture2D" uid="uid://dqoo7je55ako1" path="res://Assets/3 Objects/8 Pointers/1.png" id="10_20pc6"]
@@ -230,7 +231,6 @@ texture = ExtResource("2_cm0pq")
 10:8/0 = 0
 11:8/0 = 0
 13:8/0 = 0
-13:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:8/0 = 0
 17:8/0 = 0
 0:9/0 = 0
@@ -250,9 +250,7 @@ texture = ExtResource("2_cm0pq")
 11:9/0 = 0
 11:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:9/0 = 0
-12:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:9/0 = 0
-13:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:9/0 = 0
 15:9/0 = 0
 0:10/0 = 0
@@ -333,7 +331,6 @@ texture = ExtResource("2_cm0pq")
 23:7/0 = 0
 24:7/0 = 0
 12:8/0 = 0
-12:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 16:8/0 = 0
 18:8/0 = 0
 19:8/0 = 0
@@ -549,7 +546,8 @@ texture = ExtResource("2_cm0pq")
 24:24/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_ee4bf"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_fj5cn")
 
 [node name="Spiel" type="Node2D"]
@@ -636,6 +634,15 @@ scale = Vector2(0.999528, 0.999199)
 [node name="Slime" parent="Gegner" instance=ExtResource("6_3dxm6")]
 position = Vector2(196, 620)
 
+[node name="Fledermaus" parent="Gegner" instance=ExtResource("7_5vvyt")]
+position = Vector2(361, 767)
+
+[node name="Fledermaus2" parent="Gegner" instance=ExtResource("7_5vvyt")]
+position = Vector2(492, 742)
+
+[node name="Fledermaus3" parent="Gegner" instance=ExtResource("7_5vvyt")]
+position = Vector2(170, 762)
+
 [node name="Hinweise" type="Node2D" parent="."]
 position = Vector2(-80, 159)
 
@@ -658,7 +665,7 @@ position = Vector2(683, 662)
 LabelText = "how to edit variables (player jump height)"
 
 [node name="Spieler" parent="." instance=ExtResource("2_uu6xs")]
-position = Vector2(406, 622)
+position = Vector2(60, 622)
 metadata/locked_permanently = true
 
 [node name="Camera2D" type="Camera2D" parent="Spieler"]
