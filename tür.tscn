@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://o3qecy7acecy"]
+[gd_scene load_steps=14 format=3 uid="uid://o3qecy7acecy"]
 
 [ext_resource type="Script" uid="uid://cb6i5jgwo1n37" path="res://tür.gd" id="1_w25qd"]
 [ext_resource type="Texture2D" uid="uid://rublssx2a1rl" path="res://Assets/3 Objects/door/door.png" id="2_tga12"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://crwslrxfpvtt7" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0006.png" id="9_xhe1u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5n6l"]
-size = Vector2(12, 32)
+size = Vector2(9, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8oowp"]
 animations = [{
@@ -43,7 +43,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Tür" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w25qd"]
+size = Vector2(13, 32)
+
+[node name="Tür" type="Node2D"]
 script = ExtResource("1_w25qd")
 
 [node name="TürBlocker" type="StaticBody2D" parent="."]
@@ -51,10 +54,7 @@ script = ExtResource("1_w25qd")
 [node name="BlockKollision" type="CollisionShape2D" parent="TürBlocker"]
 position = Vector2(-179.5, 174)
 shape = SubResource("RectangleShape2D_i5n6l")
-
-[node name="TürKollision" type="CollisionShape2D" parent="."]
-position = Vector2(-180, 174)
-shape = SubResource("RectangleShape2D_i5n6l")
+one_way_collision_margin = 0.0
 
 [node name="TürSprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -82,4 +82,10 @@ position = Vector2(-183, 177)
 scale = Vector2(0.3125, 0.318182)
 sprite_frames = SubResource("SpriteFrames_8oowp")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Öffner" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Öffner"]
+position = Vector2(-179.5, 174)
+shape = SubResource("RectangleShape2D_w25qd")
+
+[connection signal="body_entered" from="Öffner" to="." method="_on_öffner_body_entered"]

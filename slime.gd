@@ -16,10 +16,10 @@ func _ready():
 	$SlimeSprite.animation_finished.connect(_animation_fertig)
 	
 func _process(delta: float) -> void:
-	if Global.gegner_getroffen.has(self):
+	if Global.gegner_getroffen.has(self) and Leben > 0:
 		Leben -= 1
 		Global.gegner_getroffen.erase(self)
-		if Leben <= 0:
+		if Leben <= 0 and $SlimeKollision != null:
 			$SlimeKollision.queue_free()
 			$SlimeSprite.play("sterben")
 		else:

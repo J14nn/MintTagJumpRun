@@ -279,3 +279,4 @@ position = Vector2(1, 7)
 shape = SubResource("RectangleShape2D_aohgu")
 
 [connection signal="body_entered" from="AngriffKollision" to="." method="_on_angriff_kollision_body_entered"]
+[connection signal="body_exited" from="AngriffKollision" to="." method="_on_angriff_kollision_body_exited"]
