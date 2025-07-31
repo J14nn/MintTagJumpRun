@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://b2d7k35em0klx" path="res://Assets/3 Objects/4 Ladder/2.png" id="2_apucc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pl7s5"]
-size = Vector2(22, 63)
+size = Vector2(22, 68)
 
 [node name="Leiter" type="Area2D"]
 script = ExtResource("1_bt0vo")
 
 [node name="LeiterKollision" type="CollisionShape2D" parent="."]
-position = Vector2(4, -25.5)
+position = Vector2(4, -28)
 shape = SubResource("RectangleShape2D_pl7s5")
 
 [node name="SpielerSprite" type="Sprite2D" parent="."]

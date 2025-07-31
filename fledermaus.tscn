@@ -165,7 +165,7 @@ animations = [{
 size = Vector2(28, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3r674"]
-size = Vector2(39, 25)
+size = Vector2(28, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jb64b"]
 radius = 63.0079
@@ -189,7 +189,7 @@ shape = SubResource("RectangleShape2D_hpv7p")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(4.5, 12)
+position = Vector2(4, 17)
 shape = SubResource("RectangleShape2D_3r674")
 
 [node name="Timer" type="Timer" parent="."]

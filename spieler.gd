@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var geschwindigkeit: float = 150
 @export var gravitation: float = 400
-@export var sprung_hoehe: float = -200 #130
+@export var sprung_hoehe: float = -200 #140 -> 200
 @export var fall_multiplier: float = 2.5
 
 var angriffs_index: int = 0 
@@ -89,7 +89,7 @@ func horizontal_bewegung():
 	if is_on_floor():
 		velocity.x = horizontal_input * geschwindigkeit
 	else:
-		var air_control_factor = 0.7
+		var air_control_factor = 0.5
 		velocity.x = horizontal_input * geschwindigkeit * air_control_factor
 
 func spieler_animation():
