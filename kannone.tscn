@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://p3a5lvuw1npq"]
+[gd_scene load_steps=12 format=3 uid="uid://p3a5lvuw1npq"]
 
 [ext_resource type="Script" uid="uid://cfregborl8rte" path="res://kannone.gd" id="1_c3t61"]
+[ext_resource type="PackedScene" uid="uid://c3atq2bjus6cv" path="res://schuss.tscn" id="2_c3t61"]
 [ext_resource type="Texture2D" uid="uid://b0x7ebrcvdy66" path="res://Assets/3 Objects/12 Rusty gun/12.png" id="2_gudt2"]
-[ext_resource type="Texture2D" uid="uid://ce2fkahrnhm81" path="res://Assets/3 Objects/12 Rusty gun/Bullet.png" id="3_dl1c4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27kgf"]
 atlas = ExtResource("2_gudt2")
@@ -50,42 +50,28 @@ animations = [{
 "texture": SubResource("AtlasTexture_hbq57")
 }],
 "loop": false,
-"name": &"default",
+"name": &"Feuer",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2ftx"]
 size = Vector2(27, 19)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2rdvm"]
-radius = 4.0
-height = 10.0
-
 [node name="Kannone" type="StaticBody2D"]
 script = ExtResource("1_c3t61")
+Schuss = ExtResource("2_c3t61")
 
 [node name="KannoneSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(0.970531, 0.989519)
 sprite_frames = SubResource("SpriteFrames_n7bjh")
+animation = &"Feuer"
 frame = 5
 frame_progress = 1.0
 
 [node name="KannoneKollision" type="CollisionShape2D" parent="."]
 position = Vector2(9.5, 14.5)
 shape = SubResource("RectangleShape2D_p2ftx")
-
-[node name="Schuss" type="Area2D" parent="."]
-
-[node name="SchussSprite" type="Sprite2D" parent="Schuss"]
-texture_filter = 1
-position = Vector2(-8, 10)
-texture = ExtResource("3_dl1c4")
-
-[node name="SchussKollision" type="CollisionShape2D" parent="Schuss"]
-position = Vector2(-8, 10)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_2rdvm")
 
 [node name="FeuerTimer" type="Timer" parent="."]
 wait_time = 3.0

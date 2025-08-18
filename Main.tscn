@@ -558,7 +558,6 @@ physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_fj5cn")
 
 [node name="Spiel" type="Node2D"]
-position = Vector2(39, -10)
 
 [node name="Level" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -628,9 +627,11 @@ scale = Vector2(4.148, 6.268)
 
 [node name="Kannone" parent="Fallen" instance=ExtResource("4_5tuhn")]
 position = Vector2(15, 234)
+SchussZeit = 4.0
 
 [node name="Kannone2" parent="Fallen" instance=ExtResource("4_5tuhn")]
 position = Vector2(62, 214)
+SchussZeit = 6.0
 
 [node name="Leitern" type="Node2D" parent="."]
 position = Vector2(847, -190)
@@ -756,7 +757,7 @@ texture_filter = 1
 texture = ExtResource("11_5vvyt")
 
 [node name="Spieler" parent="." instance=ExtResource("2_uu6xs")]
-position = Vector2(88, 620)
+position = Vector2(74, 621)
 metadata/locked_permanently = true
 
 [node name="Camera2D" type="Camera2D" parent="Spieler"]
