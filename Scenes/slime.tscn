@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://ckefah1p3faiy"]
 
-[ext_resource type="Script" path="res://Scripts/slime.gd" id="1_2002g"]
+[ext_resource type="Script" uid="uid://c443v3e1tg3au" path="res://Scripts/slime.gd" id="1_2002g"]
 [ext_resource type="Texture2D" uid="uid://csvkq3y7bm1fe" path="res://Assets/Sprites/1 Ooze/Ooze_attack.png" id="2_bratd"]
 [ext_resource type="Texture2D" uid="uid://d3p2v5x4hxyea" path="res://Assets/Sprites/1 Ooze/Ooze_walk.png" id="3_5b0gg"]
 [ext_resource type="Texture2D" uid="uid://w5mf7q2x4oop" path="res://Assets/Sprites/1 Ooze/Ooze_hurt.png" id="4_da4t2"]

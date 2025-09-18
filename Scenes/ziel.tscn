@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://b2ycnup3g8e3u"]
 
-[ext_resource type="Script" path="res://Scripts/stacheln.gd" id="1_fs5ls"]
+[ext_resource type="Script" uid="uid://4wnndck5j173" path="res://Scripts/stacheln.gd" id="1_fs5ls"]
 [ext_resource type="Texture2D" uid="uid://d25kqe1t55vv6" path="res://Assets/4 Animated objects/Star.png" id="2_pmd4c"]
-[ext_resource type="Script" path="res://Scripts/ziel_sprite.gd" id="3_fl5e0"]
+[ext_resource type="Script" uid="uid://crje2475tjvup" path="res://Scripts/ziel_sprite.gd" id="3_fl5e0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5n6l"]
 size = Vector2(20, 2)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://o3qecy7acecy"]
 
-[ext_resource type="Script" path="res://Scripts/tür.gd" id="1_w25qd"]
+[ext_resource type="Script" uid="uid://cb6i5jgwo1n37" path="res://Scripts/tür.gd" id="1_w25qd"]
 [ext_resource type="Texture2D" uid="uid://rublssx2a1rl" path="res://Assets/3 Objects/door/door.png" id="2_tga12"]
 [ext_resource type="Texture2D" uid="uid://dwiqo2g1jcrib" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0000.png" id="3_k3gtk"]
-[ext_resource type="Script" path="res://Scripts/tür_offen_sprite.gd" id="3_w25qd"]
+[ext_resource type="Script" uid="uid://fyrh8pacddpj" path="res://Scripts/tür_offen_sprite.gd" id="3_w25qd"]
 [ext_resource type="Texture2D" uid="uid://6chh8g0uqpfc" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0001.png" id="4_w25qd"]
 [ext_resource type="Texture2D" uid="uid://c77ycibk3sqs2" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0002.png" id="5_wwjim"]
 [ext_resource type="Texture2D" uid="uid://kxadod1kiew" path="res://Assets/3 Objects/Lock/Sprites/Small Sturdy Padlock - GOLD - 0003.png" id="6_m04sa"]

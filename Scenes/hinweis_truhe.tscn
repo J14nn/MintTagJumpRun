@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://k6f618c6kr80"]
 
 [ext_resource type="Texture2D" uid="uid://ck5umemocifft" path="res://Assets/4 Animated objects/Chest.png" id="1_5p6l5"]
-[ext_resource type="Script" path="res://Scripts/hinweis_truhe.gd" id="1_e5unk"]
-[ext_resource type="Script" path="res://Scripts/hint.gd" id="3_40sv7"]
+[ext_resource type="Script" uid="uid://by48t67kw25ak" path="res://Scripts/hinweis_truhe.gd" id="1_e5unk"]
+[ext_resource type="Script" uid="uid://ditrggk4dlid4" path="res://Scripts/hint.gd" id="3_40sv7"]
 [ext_resource type="Texture2D" uid="uid://cvcjxlhti2840" path="res://Assets/UI/1 Frames/Frame1.png" id="3_jlqde"]
 [ext_resource type="FontFile" uid="uid://cyrnd5fuic7ad" path="res://Assets/UI/6 Font/CraftPixNet Survival Kit.otf" id="3_xgdyu"]
 [ext_resource type="Texture2D" uid="uid://ut5fl5qpo1g" path="res://Assets/UI/IconsShadow-160.png" id="6_5xpb4"]

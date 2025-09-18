@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ytq1lc3w5si2"]
 
-[ext_resource type="Script" path="res://Scripts/cloudlayer.gd" id="1_d3ni7"]
+[ext_resource type="Script" uid="uid://crwksc6quqki0" path="res://Scripts/cloudlayer.gd" id="1_d3ni7"]
 [ext_resource type="Texture2D" uid="uid://bitb30sfas3vm" path="res://Assets/2 Background/Layers/forest_sky.png" id="2_b5b64"]
 [ext_resource type="Texture2D" uid="uid://v3c6ajd1trlq" path="res://Assets/2 Background/Layers/forest_mountain.png" id="3_tpetq"]
 [ext_resource type="Texture2D" uid="uid://db8rgnaahakli" path="res://Assets/2 Background/Layers/forest_back.png" id="4_fq4hq"]

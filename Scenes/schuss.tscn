@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3atq2bjus6cv"]
 
-[ext_resource type="Script" path="res://Scripts/schuss.gd" id="1_lspm7"]
+[ext_resource type="Script" uid="uid://ct2c6w5tmx0de" path="res://Scripts/schuss.gd" id="1_lspm7"]
 [ext_resource type="Texture2D" uid="uid://ce2fkahrnhm81" path="res://Assets/3 Objects/12 Rusty gun/Bullet.png" id="2_5k1up"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bldr2"]

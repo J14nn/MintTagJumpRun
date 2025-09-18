@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://djneanninls4n"]
 
-[ext_resource type="Script" path="res://Scripts/schlüssel.gd" id="1_8e358"]
+[ext_resource type="Script" uid="uid://cwowjk7mrgs6w" path="res://Scripts/schlüssel.gd" id="1_8e358"]
 [ext_resource type="Texture2D" uid="uid://dup0k5rhyn4sn" path="res://Assets/4 Animated objects/Key.png" id="1_vtisg"]
-[ext_resource type="Script" path="res://Scripts/schlüssel_sprite.gd" id="2_8e358"]
+[ext_resource type="Script" uid="uid://c6gpgquhpo05c" path="res://Scripts/schlüssel_sprite.gd" id="2_8e358"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j5vyn"]
 radius = 6.0
