@@ -268,11 +268,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jan\\source\\repos\\WordHighlighter\\WordHighlighter\\WordHighlighter.csproj",
+      "projectUniqueName": "C:\\Users\\Jan\\Documents\\ferber-jump'nrun\\.WordHighlighter\\WordHighlighter\\WordHighlighter.csproj",
       "projectName": "WordHighlighter",
-      "projectPath": "C:\\Users\\Jan\\source\\repos\\WordHighlighter\\WordHighlighter\\WordHighlighter.csproj",
+      "projectPath": "C:\\Users\\Jan\\Documents\\ferber-jump'nrun\\.WordHighlighter\\WordHighlighter\\WordHighlighter.csproj",
       "packagesPath": "C:\\Users\\Jan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jan\\source\\repos\\WordHighlighter\\WordHighlighter\\obj\\",
+      "outputPath": "C:\\Users\\Jan\\Documents\\ferber-jump'nrun\\.WordHighlighter\\WordHighlighter\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -60,7 +60,7 @@ namespace WordHighlighter {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WordHighlighter;V1.0.0.0;component/overlaywindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WordHighlighter;component/overlaywindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\OverlayWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
