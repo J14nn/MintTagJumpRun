@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace WordHighlighter
@@ -9,13 +11,20 @@ namespace WordHighlighter
         {
             base.OnStartup(e);
 
-            var words = new List<string>
+            if (e.Args.Length < 2)
             {
-                "Spieler",
-                "Sprung"
-            };
+                MessageBox.Show("Usage: WordHighlighter.exe <TargetWindowKeyword> <Word1,Word2,...>");
+                Shutdown();
+                return;
+            }
 
-            var overlay = new OverlayWindow("Godot Engine", words);
+            string targetWindowKeyword = e.Args[0];
+
+            var words = e.Args[1].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                  .Select(w => w.Trim())
+                                  .ToList();
+
+            var overlay = new OverlayWindow(targetWindowKeyword, words);
             overlay.Show();
         }
     }
