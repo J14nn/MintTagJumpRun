@@ -1,4 +1,5 @@
-﻿using System.Windows;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace WordHighlighter
 {
@@ -8,7 +9,13 @@ namespace WordHighlighter
         {
             base.OnStartup(e);
 
-            var overlay = new OverlayWindow("Godot Engine", "HinweisTruhe");
+            var words = new List<string>
+            {
+                "Spieler",
+                "Sprung"
+            };
+
+            var overlay = new OverlayWindow("Godot Engine", words);
             overlay.Show();
         }
     }
