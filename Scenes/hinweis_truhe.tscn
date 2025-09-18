@@ -1,0 +1,208 @@
+[gd_scene load_steps=20 format=3 uid="uid://k6f618c6kr80"]
+
+[ext_resource type="Texture2D" uid="uid://ck5umemocifft" path="res://Assets/4 Animated objects/Chest.png" id="1_5p6l5"]
+[ext_resource type="Script" path="res://Scripts/hinweis_truhe.gd" id="1_e5unk"]
+[ext_resource type="Script" path="res://Scripts/hint.gd" id="3_40sv7"]
+[ext_resource type="Texture2D" uid="uid://cvcjxlhti2840" path="res://Assets/UI/1 Frames/Frame1.png" id="3_jlqde"]
+[ext_resource type="FontFile" uid="uid://cyrnd5fuic7ad" path="res://Assets/UI/6 Font/CraftPixNet Survival Kit.otf" id="3_xgdyu"]
+[ext_resource type="Texture2D" uid="uid://ut5fl5qpo1g" path="res://Assets/UI/IconsShadow-160.png" id="6_5xpb4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5unk"]
+size = Vector2(26, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgdyu"]
+atlas = ExtResource("1_5p6l5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40sv7"]
+atlas = ExtResource("1_5p6l5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlqde"]
+atlas = ExtResource("1_5p6l5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soe6w"]
+atlas = ExtResource("1_5p6l5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5xpb4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgdyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40sv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlqde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soe6w")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_soe6w"]
+
+[sub_resource type="Animation" id="Animation_5xpb4"]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.233333, 0.533333, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.676, 0.702), Vector2(0.566, 0.588)]
+}
+
+[sub_resource type="Animation" id="Animation_fljnx"]
+resource_name = "Attention"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667, 0.533333, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.193732, -0.191986, 0.193732, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_soe6w"]
+resource_name = "Click"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.566, 0.588), Vector2(0.676, 0.702), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_2xi76"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.566, 0.588)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wl6x6"]
+_data = {
+&"Appear": SubResource("Animation_5xpb4"),
+&"Attention": SubResource("Animation_fljnx"),
+&"Click": SubResource("Animation_soe6w"),
+&"RESET": SubResource("Animation_2xi76")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjrck"]
+atlas = ExtResource("6_5xpb4")
+region = Rect2(970, 1130, 140, 130)
+
+[node name="HinweisTruhe" type="Area2D"]
+script = ExtResource("1_e5unk")
+
+[node name="TruheKollision" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 8)
+shape = SubResource("RectangleShape2D_e5unk")
+
+[node name="TruheSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5xpb4")
+
+[node name="Hint" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = -94.0
+offset_right = 85.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jlqde")
+script = ExtResource("3_40sv7")
+metadata/_edit_use_anchors_ = true
+
+[node name="HelpButton" type="Button" parent="Hint"]
+layout_mode = 0
+offset_left = 162.0
+offset_top = -16.0
+offset_right = 251.0
+offset_bottom = 56.0
+scale = Vector2(0.369, 0.346)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_soe6w")
+flat = true
+
+[node name="ButtonAnimation" type="AnimationPlayer" parent="Hint/HelpButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_wl6x6")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Hint/HelpButton"]
+texture_filter = 1
+position = Vector2(45, 40.462)
+scale = Vector2(0.566, 0.588)
+texture = SubResource("AtlasTexture_tjrck")
+
+[node name="Timer" type="Timer" parent="Hint/HelpButton"]
+
+[node name="HintText" type="RichTextLabel" parent="Hint"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -18.5
+offset_right = 71.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_xgdyu")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "
+"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="pressed" from="Hint/HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="timeout" from="Hint/HelpButton/Timer" to="." method="_on_timer_timeout"]

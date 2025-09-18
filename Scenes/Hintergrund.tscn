@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://ytq1lc3w5si2"]
+
+[ext_resource type="Script" path="res://Scripts/cloudlayer.gd" id="1_d3ni7"]
+[ext_resource type="Texture2D" uid="uid://bitb30sfas3vm" path="res://Assets/2 Background/Layers/forest_sky.png" id="2_b5b64"]
+[ext_resource type="Texture2D" uid="uid://v3c6ajd1trlq" path="res://Assets/2 Background/Layers/forest_mountain.png" id="3_tpetq"]
+[ext_resource type="Texture2D" uid="uid://db8rgnaahakli" path="res://Assets/2 Background/Layers/forest_back.png" id="4_fq4hq"]
+[ext_resource type="Texture2D" uid="uid://dngqjd0um3aql" path="res://Assets/2 Background/Layers/forest_mid.png" id="5_mcb7j"]
+[ext_resource type="Texture2D" uid="uid://d00vm264uvytt" path="res://Assets/2 Background/Layers/forest_long.png" id="6_8d47c"]
+
+[node name="Hintergrund" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(959, 58)
+motion_scale = Vector2(0.1, 1)
+motion_mirroring = Vector2(959.405, 0)
+script = ExtResource("1_d3ni7")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-476, 266)
+scale = Vector2(0.505, 0.505)
+texture = ExtResource("2_b5b64")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(961, 59)
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(3800, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-2, 294)
+scale = Vector2(0.505, 0.505)
+texture = ExtResource("3_tpetq")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(961, 59)
+motion_scale = Vector2(0.3, 1)
+motion_mirroring = Vector2(3800, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-3, 276)
+scale = Vector2(0.505, 0.505)
+texture = ExtResource("4_fq4hq")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(961, 59)
+motion_scale = Vector2(0.4, 1)
+motion_mirroring = Vector2(3800, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-7, 225)
+scale = Vector2(0.505, 0.505)
+texture = ExtResource("5_mcb7j")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(986, 322)
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(3800, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-24, 42)
+scale = Vector2(0.505, 0.505)
+texture = ExtResource("6_8d47c")
+metadata/_edit_lock_ = true

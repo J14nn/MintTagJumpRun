@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://p3a5lvuw1npq"]
+
+[ext_resource type="Script" path="res://Scripts/kannone.gd" id="1_c3t61"]
+[ext_resource type="PackedScene" uid="uid://c3atq2bjus6cv" path="res://Scenes/schuss.tscn" id="2_c3t61"]
+[ext_resource type="Texture2D" uid="uid://b0x7ebrcvdy66" path="res://Assets/3 Objects/12 Rusty gun/12.png" id="2_gudt2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27kgf"]
+atlas = ExtResource("2_gudt2")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j14oc"]
+atlas = ExtResource("2_gudt2")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5juc2"]
+atlas = ExtResource("2_gudt2")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myedi"]
+atlas = ExtResource("2_gudt2")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amr6c"]
+atlas = ExtResource("2_gudt2")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbq57"]
+atlas = ExtResource("2_gudt2")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n7bjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27kgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j14oc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5juc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myedi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amr6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbq57")
+}],
+"loop": false,
+"name": &"Feuer",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2ftx"]
+size = Vector2(27, 19)
+
+[node name="Kannone" type="StaticBody2D"]
+script = ExtResource("1_c3t61")
+Schuss = ExtResource("2_c3t61")
+
+[node name="KannoneSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.970531, 0.989519)
+sprite_frames = SubResource("SpriteFrames_n7bjh")
+animation = &"Feuer"
+frame = 5
+frame_progress = 1.0
+
+[node name="KannoneKollision" type="CollisionShape2D" parent="."]
+position = Vector2(9.5, 14.5)
+shape = SubResource("RectangleShape2D_p2ftx")
+
+[node name="FeuerTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="FeuerTimer" to="." method="_on_feuer_timer_timeout"]
