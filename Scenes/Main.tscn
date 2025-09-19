@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://m0oj7iegs5"]
+[gd_scene load_steps=23 format=4 uid="uid://m0oj7iegs5"]
 
 [ext_resource type="Texture2D" uid="uid://rugygb8fh4g6" path="res://Assets/1 Tiles/Assets.png" id="2_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://d2lj5w2df5m2q" path="res://Scenes/Spieler.tscn" id="2_uu6xs"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://coki02cmh7mjo" path="res://Scenes/stacheln.tscn" id="4_fos0i"]
 [ext_resource type="PackedScene" uid="uid://o3qecy7acecy" path="res://Scenes/tür.tscn" id="5_03owx"]
 [ext_resource type="PackedScene" uid="uid://ckefah1p3faiy" path="res://Scenes/slime.tscn" id="6_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://thrkuheuviux" path="res://Scenes/BigLeiter.tscn" id="6_sxkr1"]
 [ext_resource type="PackedScene" uid="uid://ckrnx80ohijh8" path="res://Scenes/fledermaus.tscn" id="7_5vvyt"]
 [ext_resource type="PackedScene" uid="uid://k6f618c6kr80" path="res://Scenes/hinweis_truhe.tscn" id="7_lgr22"]
 [ext_resource type="PackedScene" uid="uid://b2ycnup3g8e3u" path="res://Scenes/ziel.tscn" id="8_trn2v"]
@@ -637,24 +638,16 @@ SchussZeit = 6.0
 position = Vector2(847, -190)
 
 [node name="Leiter2" parent="Leitern" instance=ExtResource("3_r0du0")]
-position = Vector2(-731, 1083)
-scale = Vector2(0.680429, 0.934662)
+position = Vector2(-731, 1085)
+scale = Vector2(0.755, 1)
 
-[node name="Leiter4" parent="Leitern" instance=ExtResource("3_r0du0")]
-position = Vector2(-187, 1020)
-scale = Vector2(0.680429, 0.934662)
-
-[node name="Leiter5" parent="Leitern" instance=ExtResource("3_r0du0")]
+[node name="Leiter1" parent="Leitern" instance=ExtResource("3_r0du0")]
 position = Vector2(-537, 827)
 scale = Vector2(0.74117, 1.14391)
 
-[node name="Leiter6" parent="Leitern" instance=ExtResource("3_r0du0")]
-position = Vector2(-187, 1083)
-scale = Vector2(0.680429, 0.934662)
-
-[node name="Leiter7" parent="Leitern" instance=ExtResource("3_r0du0")]
+[node name="BigLeiter" parent="Leitern" instance=ExtResource("6_sxkr1")]
 position = Vector2(-187, 1148)
-scale = Vector2(0.68, 0.96)
+scale = Vector2(0.7, 1)
 
 [node name="Türen" type="Node2D" parent="."]
 
@@ -759,7 +752,7 @@ texture_filter = 1
 texture = ExtResource("11_5vvyt")
 
 [node name="Spieler" parent="." instance=ExtResource("2_uu6xs")]
-position = Vector2(74, 621)
+position = Vector2(78, 621)
 metadata/locked_permanently = true
 
 [node name="Camera2D" type="Camera2D" parent="Spieler"]

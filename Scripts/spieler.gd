@@ -2,8 +2,9 @@ extends CharacterBody2D
 
 @export var geschwindigkeit: float = 150
 @export var gravitation: float = 400
-@export var sprung_hoehe: float = -200 #140 -> 200
+@export var sprungHoehe: float = 200 #140 -> 200
 @export var fall_multiplier: float = 2.5
+var respawn_position: Vector2
 
 var angriffs_index: int = 0 
 var gestorben: bool = false;
@@ -11,12 +12,15 @@ var gegner_im_bereich: Array[Node2D] = []
 var gegner_bereits_getroffen: Array[Node2D] = []
 
 func _ready():
+	respawn_position = position
 	$SpielerSprite.animation_finished.connect(_animation_fertig)
 	
 func _process(_delta: float) -> void:
-	if Global.tot and gestorben == false:
+	if Global.tot and not gestorben:
 		$SpielerSprite.play("sterben")
-		gestorben = true;
+		gestorben = true
+		await get_tree().create_timer(3.0).timeout
+		respawn()
 	if Global.angreift:
 		for gegner in gegner_im_bereich:
 			if not Global.gegner_getroffen.has(gegner) and not gegner_bereits_getroffen.has(gegner):
@@ -51,6 +55,13 @@ func _physics_process(delta):
 	if is_on_floor() and Global.springt:
 		Global.springt = false
 
+func respawn():
+	Global.tot = false
+	gestorben = false
+	position = respawn_position
+	velocity = Vector2.ZERO
+	$SpielerSprite.play("stehen")
+	
 func _input(event):
 	if Global.tot:
 		return
@@ -67,7 +78,7 @@ func _input(event):
 		angriffs_index = 1 - angriffs_index
 
 	if event.is_action_pressed("ui_jump") and is_on_floor():
-		velocity.y = sprung_hoehe
+		velocity.y = -sprungHoehe
 		Global.springt = true
 		$SpielerSprite.play("springen")
 
@@ -77,8 +88,12 @@ func _input(event):
 			velocity.y = -50
 			gravitation = 0
 			geschwindigkeit = 50
-
-		elif event.is_action_released("ui_up"):
+		elif event.is_action_pressed("ui_down"):
+			$SpielerSprite.play("klettern_seite")
+			velocity.y = 50
+			gravitation = 0
+			geschwindigkeit = 50
+		elif event.is_action_released("ui_up") or event.is_action_released("ui_down"):
 			velocity.y = 0
 	else:
 		gravitation = 200
