@@ -2,7 +2,7 @@
   "profiles": {
     "WordHighlighter": {
       "commandName": "Project",
-      "commandLineArgs": "\"Godot\" \"Spieler,Sprung\""
+      "commandLineArgs": "\"Spieler,Sprung\" \"C:\\\\Users\\\\Jan\\\\Documents\\\\Ferber-MintTag\\\\.Wordhighlighter_Release\\\\config.json\""
     }
   }
 }

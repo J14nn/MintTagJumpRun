@@ -1,10 +1,10 @@
 extends StaticBody2D
 
 @export var Schuss: PackedScene
-@export var SchussZeit: float = 3
+@export var Schuss_intervall: float = 3
 
 func _ready() -> void:
-	$FeuerTimer.wait_time = SchussZeit
+	$FeuerTimer.wait_time = Schuss_intervall
 
 func Schießen() -> void:
 	$KannoneSprite.play("Feuer")

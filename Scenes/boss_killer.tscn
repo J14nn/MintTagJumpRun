@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://dedwfyslmsr0"]
+
+[ext_resource type="Script" uid="uid://bydd27xqekhby" path="res://Scripts/boss_killer.gd" id="1_edd04"]
+[ext_resource type="Texture2D" uid="uid://dco0yg3v4g86x" path="res://Assets/3 Objects/10 Power explosion/10.png" id="2_lnwrj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrwlc"]
+atlas = ExtResource("2_lnwrj")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aottk"]
+atlas = ExtResource("2_lnwrj")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iruye"]
+atlas = ExtResource("2_lnwrj")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwo3h"]
+atlas = ExtResource("2_lnwrj")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lah5"]
+atlas = ExtResource("2_lnwrj")
+region = Rect2(288, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e454e"]
+atlas = ExtResource("2_lnwrj")
+region = Rect2(360, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjfrw"]
+atlas = ExtResource("2_lnwrj")
+region = Rect2(432, 0, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_navpu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrwlc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aottk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iruye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwo3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lah5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e454e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjfrw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45yvo"]
+size = Vector2(12, 12)
+
+[node name="BossKiller" type="Area2D"]
+script = ExtResource("1_edd04")
+
+[node name="BossKillerSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, -2)
+scale = Vector2(0.625074, 0.631944)
+sprite_frames = SubResource("SpriteFrames_navpu")
+
+[node name="BossKillerKollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_45yvo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

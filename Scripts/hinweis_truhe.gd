@@ -2,12 +2,21 @@ extends Area2D
 
 var offen: bool = false
 var help_clicked: bool = false
+@export var searchAvailable: bool = true
 @export var LabelText: String = "test"
 @export var onEdge: bool = false
 @export var WordsToFind: String = "Spieler"
 
 func _ready() -> void:
-	$Hint/HintText.text = "[center]" + LabelText + "[/center]"
+	$Hint/HintText.parse_bbcode("[center]" + LabelText + "[/center]")
+func _process(_delta: float) -> void:
+	if (!searchAvailable):
+		$Hint/HelpButton.disabled = true
+		$Hint/HelpButton/Sprite2D.visible = false
+	if (help_clicked):
+		$Hint/HelpButton.disabled = true
+	else:
+		$Hint/HelpButton.disabled = false
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Spieler":
@@ -15,34 +24,42 @@ func _on_body_entered(body: Node2D) -> void:
 			$TruheSprite.play("default")
 			offen = true
 		$Hint.visible = true
-		$Hint/HelpButton/Timer.start()
+		if searchAvailable:
+			$Hint/HelpButton/ButtonAnimation.play("Appear")
+			$Hint/HelpButton/Timer.start()
 
 
 func _on_body_exited(body: Node2D) -> void:
-		if body.name == "Spieler":
-			if offen:
-				$Hint.visible = false
+	if body.name == "Spieler":
+		if offen:
+			if Global.SearcherRunning:
+				Global.CommandWordSearcher("close")
+				Global.SearcherRunning = false
+			$Hint.visible = false
+			$TruheSprite.play("close")
+			$Hint/HelpButton/Timer.wait_time = 2.0
+			$Hint/HelpButton/Timer.start()
+			help_clicked = false			
+			offen = false
+				
 
 
 func _on_help_button_pressed() -> void:
 	$Hint/HelpButton/ButtonAnimation.play("Click")
-	$Hint/HelpButton/Timer.wait_time = 30.0
+	$Hint/HelpButton/Timer.wait_time = 10.0
 	$Hint/HelpButton/Timer.start()
 	help_clicked = true
-	
-	var exe_path = ProjectSettings.globalize_path("res://.Wordhighlighter_Release/WordHighlighter.exe")
-	print(exe_path)
-	var args = ["\"Godot\"", "\"" + WordsToFind + "\""]
-	var pid = OS.create_process(exe_path, args)
-	if pid == -1:
-		push_error("Failed to start WordHighlighter")
+
+	if !Global.SearcherRunning:
+		Global.StartWordSearcher(WordsToFind)		
+	Global.CommandWordSearcher("search")
 
 func _on_timer_timeout() -> void:
-	if !help_clicked:
+	if !help_clicked && $Hint.visible:
 		$Hint/HelpButton/ButtonAnimation.play("Attention")
 		$Hint/HelpButton/Timer.start()
 	else:
 		$Hint/HelpButton/ButtonAnimation.play("Appear")
-		$Hint/HelpButton/Timer.wait_time = 1.0
+		$Hint/HelpButton/Timer.wait_time = 2.0
 		$Hint/HelpButton/Timer.start()
 		help_clicked = false

@@ -5,27 +5,30 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Windows.Threading;
-using Tesseract;
 
 namespace WordHighlighter
 {
     public partial class OverlayWindow : Window
     {
         private readonly IList<string> _words;
-        private int _currentIndex = 0;
-        private readonly DispatcherTimer _pollTimer;
         private readonly string _targetWindowKeyword;
+        private readonly string _tessdataPath;
 
-        public OverlayWindow(string targetWindowKeyword, IList<string> wordsToHighlight)
+        public OverlayWindow(string targetWindowKeyword, IList<string> wordsToHighlight, string tessdataPath)
         {
             InitializeComponent();
             _targetWindowKeyword = targetWindowKeyword;
             _words = wordsToHighlight;
+            _tessdataPath = tessdataPath;
+
+            //string argsInfo = $"TargetWindowKeyword: {_targetWindowKeyword}\n" +
+            //      $"Words: {string.Join(", ", _words)}\n" +
+            //      $"TessdataPath: {_tessdataPath}";
+            //MessageBox.Show(argsInfo, "Debug Args");
 
             var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
             int exStyle = NativeMethods.GetWindowLong(hwnd, NativeMethods.GWL_EXSTYLE);
-            NativeMethods.SetWindowLong(hwnd, NativeMethods.GWL_EXSTYLE, exStyle | 0x20);
+            NativeMethods.SetWindowLong(hwnd, NativeMethods.GWL_EXSTYLE, exStyle | 0x08000000 | 0x20 | 0x80);
 
             var bounds = ScreenCapture.GetWindowBounds(targetWindowKeyword);
             Left = bounds.Left;
@@ -34,57 +37,24 @@ namespace WordHighlighter
             Height = bounds.Height;
         }
 
-
         public void PollForWord()
         {
-            if (_currentIndex >= _words.Count)
-            {
-                _pollTimer.Stop();
-                return;
-            }
-
-            string current = _words[_currentIndex];
-            string next = (_currentIndex + 1 < _words.Count) ? _words[_currentIndex + 1] : current;
-
             var bmp = ScreenCapture.CaptureWindow(_targetWindowKeyword);
-            var ocrWords = OCRProcessor.GetWords(bmp);
+            var ocrWords = OCRProcessor.GetWords(bmp, _tessdataPath);
 
-            var currentMatches = ocrWords.FindAll(w =>
-                w.Text.Equals(current, System.StringComparison.OrdinalIgnoreCase));
-
-            var nextMatches = next != null
-                ? ocrWords.FindAll(w =>
-                    w.Text.Equals(next, System.StringComparison.OrdinalIgnoreCase))
-                : new List<OCRResult>();
-
-            if (nextMatches.Count > 0)
+            for (int i = _words.Count - 1; i >= 0; i--)
             {
-                _currentIndex++;
-                DrawHighlights(new List<OCRResult>());
-                return;
-            }
+                var matches = ocrWords.FindAll(w =>
+                    w.Text.Equals(_words[i], System.StringComparison.OrdinalIgnoreCase));
 
-            if (currentMatches.Count > 0)
-            {
-                DrawHighlights(currentMatches);
-            }
-            else if (_currentIndex > 0)
-            {
-                string previousWord = _words[_currentIndex - 1];
-                var previousMatches = ocrWords.FindAll(w =>
-                    w.Text.Equals(previousWord, System.StringComparison.OrdinalIgnoreCase));
-
-                if (previousMatches.Count > 0)
+                if (matches.Count > 0)
                 {
-                    _currentIndex--;
-                    DrawHighlights(previousMatches);
+                    DrawHighlights(matches);
+                    return;
                 }
-                else { OverlayCanvas.Children.Clear(); }
             }
-            else
-            {
-                OverlayCanvas.Children.Clear();
-            }
+
+            OverlayCanvas.Children.Clear();
         }
 
         private void DrawHighlights(List<OCRResult> words)

@@ -1,9 +1,13 @@
-[gd_scene load_steps=54 format=3 uid="uid://d2lj5w2df5m2q"]
+[gd_scene load_steps=58 format=3 uid="uid://d2lj5w2df5m2q"]
 
 [ext_resource type="Script" uid="uid://bn0n0hvuaesdc" path="res://Scripts/spieler.gd" id="1_aohgu"]
 [ext_resource type="Texture2D" uid="uid://bgyjvrxkd05an" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-attack1-00.png" id="2_ammq1"]
+[ext_resource type="Texture2D" uid="uid://dv33foj6812lw" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-smrslt-00.png" id="2_iad6x"]
 [ext_resource type="Texture2D" uid="uid://blpnqtntbjkf6" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-attack1-01.png" id="3_a504t"]
+[ext_resource type="Texture2D" uid="uid://da5c4kiyu2t7o" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-smrslt-01.png" id="3_hx6kl"]
+[ext_resource type="Texture2D" uid="uid://lce1eij37ubo" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-smrslt-02.png" id="4_44bv8"]
 [ext_resource type="Texture2D" uid="uid://di1ts87hiwpgd" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-attack1-02.png" id="4_a1p20"]
+[ext_resource type="Texture2D" uid="uid://cbocyag1iqhs4" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-smrslt-03.png" id="5_bx5pq"]
 [ext_resource type="Texture2D" uid="uid://cv3mro7ig41tn" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-attack1-03.png" id="5_xqbox"]
 [ext_resource type="Texture2D" uid="uid://s2ijc4ncx818" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-attack1-04.png" id="6_cqura"]
 [ext_resource type="Texture2D" uid="uid://7veh3yf253ox" path="res://Assets/Sprites/Adventurer/Individual Sprites/adventurer-attack2-00.png" id="7_mlgcg"]
@@ -53,6 +57,23 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1mtup"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iad6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hx6kl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_44bv8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bx5pq")
+}],
+"loop": true,
+"name": &"FlyAround",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_ammq1")
@@ -262,6 +283,7 @@ texture_filter = 1
 position = Vector2(14, 4)
 sprite_frames = SubResource("SpriteFrames_1mtup")
 animation = &"stehen"
+frame_progress = 0.0255373
 
 [node name="SpielerKollision" type="CollisionShape2D" parent="."]
 position = Vector2(14, 7)

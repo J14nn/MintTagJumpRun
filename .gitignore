@@ -1,5 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-/.WordHighlighter/WordHighlighter/obj/Release/net9.0-windows
-/.WordHighlighter/WordHighlighter/bin/Release/net9.0-windows
+/.WordHighlighter/WordHighlighter/obj
+/.WordHighlighter/WordHighlighter/bin
+/.WordHighlighter/WordHighlighter/.vs
+/.WordHighlighter/.vs/WordHighlighter

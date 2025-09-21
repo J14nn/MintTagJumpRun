@@ -13,7 +13,7 @@ namespace Highlighter
 
     public static class OCRProcessor
     {
-        public static List<OCRResult> GetWords(Bitmap bitmap, string tessdataPath = @"tessdata")
+        public static List<OCRResult> GetWords(Bitmap bitmap, string tessdataPath)
         {
             var results = new List<OCRResult>();
 

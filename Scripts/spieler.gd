@@ -2,18 +2,27 @@ extends CharacterBody2D
 
 @export var geschwindigkeit: float = 150
 @export var gravitation: float = 400
-@export var sprungHoehe: float = 200 #140 -> 200
 @export var fall_multiplier: float = 2.5
-var respawn_position: Vector2
 
 var angriffs_index: int = 0 
 var gestorben: bool = false;
 var gegner_im_bereich: Array[Node2D] = []
 var gegner_bereits_getroffen: Array[Node2D] = []
+var flying_random: bool = false
+var fly_velocity: Vector2 = Vector2.ZERO
+var fly_speed: float = 300
+var fly_timer: float = 0.0
+var fly_change_interval: float = 0.2  
 
 func _ready():
-	respawn_position = position
 	$SpielerSprite.animation_finished.connect(_animation_fertig)
+	
+func Spring ():
+	var Sprunghoehe: float = 140
+	Sprunghoehe = _update_internal_value(Sprunghoehe)
+	velocity.y = -Sprunghoehe
+	Global.springt = true
+	$SpielerSprite.play("springen")
 	
 func _process(_delta: float) -> void:
 	if Global.tot and not gestorben:
@@ -28,12 +37,31 @@ func _process(_delta: float) -> void:
 				gegner_bereits_getroffen.append(gegner)
 
 func _physics_process(delta):
+	if Global.win:
+		if not flying_random:
+			flying_random = true
+			fly_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * fly_speed
+			fly_timer = fly_change_interval
+
+		fly_timer -= delta
+		if fly_timer <= 0:
+			fly_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * fly_speed
+			fly_timer = fly_change_interval
+
+		var jitter = Vector2(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5)) * 50
+		fly_velocity += jitter
+		fly_velocity = fly_velocity.limit_length(fly_speed)
+
+		position += fly_velocity * delta
+		$SpielerSprite.play("FlyAround")
+		return
+
 	if Global.tot:
 		velocity.y = 100
 		velocity.x = 0
 		move_and_slide()
 		return
-	
+
 	if velocity.y > 0:
 		velocity.y += gravitation * fall_multiplier * delta
 	else:  
@@ -58,9 +86,8 @@ func _physics_process(delta):
 func respawn():
 	Global.tot = false
 	gestorben = false
-	position = respawn_position
-	velocity = Vector2.ZERO
-	$SpielerSprite.play("stehen")
+	var main_scene_path = "res://Scenes/Main.tscn"
+	get_tree().change_scene_to_file(main_scene_path)
 	
 func _input(event):
 	if Global.tot:
@@ -78,9 +105,7 @@ func _input(event):
 		angriffs_index = 1 - angriffs_index
 
 	if event.is_action_pressed("ui_jump") and is_on_floor():
-		velocity.y = -sprungHoehe
-		Global.springt = true
-		$SpielerSprite.play("springen")
+		Spring()
 
 	if Global.klettert:
 		if event.is_action_pressed("ui_up"):
@@ -136,3 +161,8 @@ func _on_angriff_kollision_body_entered(body: Node2D) -> void:
 func _on_angriff_kollision_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Gegner") and gegner_im_bereich.has(body):
 		gegner_im_bereich.erase(body)
+		
+func _update_internal_value(v: float) -> float:
+	if v > 200.0:
+		return 200.0
+	return v
