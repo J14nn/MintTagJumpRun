@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "C45P6uiUQA0=",
+  "dgSpecHash": "obUgzVnWrzs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jan\\Documents\\ferber-jump'nrun\\.WordHighlighter\\WordHighlighter\\WordHighlighter.csproj",
+  "projectFilePath": "C:\\Users\\Jan\\Documents\\Ferber-MintTag\\.WordHighlighter\\WordHighlighter\\WordHighlighter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jan\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.9\\microsoft.win32.systemevents.9.0.9.nupkg.sha512",
     "C:\\Users\\Jan\\.nuget\\packages\\system.drawing.common\\9.0.9\\system.drawing.common.9.0.9.nupkg.sha512",

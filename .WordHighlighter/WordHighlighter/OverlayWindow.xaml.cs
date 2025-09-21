@@ -16,8 +16,6 @@ namespace WordHighlighter
         private int _currentIndex = 0;
         private readonly DispatcherTimer _pollTimer;
         private readonly string _targetWindowKeyword;
-        private Bitmap _lastBmp;
-        private List<OCRResult> _lastOcrWords;
 
         public OverlayWindow(string targetWindowKeyword, IList<string> wordsToHighlight)
         {
@@ -34,17 +32,10 @@ namespace WordHighlighter
             Top = bounds.Top;
             Width = bounds.Width;
             Height = bounds.Height;
-
-            _pollTimer = new DispatcherTimer
-            {
-                Interval = System.TimeSpan.FromMilliseconds(500)
-            };
-            _pollTimer.Tick += PollForWord;
-            _pollTimer.Start();
         }
 
 
-        private void PollForWord(object sender, System.EventArgs e)
+        public void PollForWord()
         {
             if (_currentIndex >= _words.Count)
             {
@@ -53,19 +44,10 @@ namespace WordHighlighter
             }
 
             string current = _words[_currentIndex];
-            string next = (_currentIndex + 1 < _words.Count) ? _words[_currentIndex + 1] : null;
+            string next = (_currentIndex + 1 < _words.Count) ? _words[_currentIndex + 1] : current;
 
             var bmp = ScreenCapture.CaptureWindow(_targetWindowKeyword);
-
-            if (_lastBmp == null || HasBitmapChanged(bmp))
-            {
-                OverlayCanvas.Children.Clear();
-                _lastOcrWords = OCRProcessor.GetWords(bmp);
-                _lastBmp?.Dispose();
-                _lastBmp = (Bitmap)bmp.Clone();
-            }
-
-            var ocrWords = _lastOcrWords;
+            var ocrWords = OCRProcessor.GetWords(bmp);
 
             var currentMatches = ocrWords.FindAll(w =>
                 w.Text.Equals(current, System.StringComparison.OrdinalIgnoreCase));
@@ -92,11 +74,16 @@ namespace WordHighlighter
                 var previousMatches = ocrWords.FindAll(w =>
                     w.Text.Equals(previousWord, System.StringComparison.OrdinalIgnoreCase));
 
-                DrawHighlights(previousMatches);
+                if (previousMatches.Count > 0)
+                {
+                    _currentIndex--;
+                    DrawHighlights(previousMatches);
+                }
+                else { OverlayCanvas.Children.Clear(); }
             }
             else
             {
-                DrawHighlights(new List<OCRResult>());
+                OverlayCanvas.Children.Clear();
             }
         }
 
@@ -136,27 +123,5 @@ namespace WordHighlighter
             [System.Runtime.InteropServices.DllImport("user32.dll")]
             public static extern int SetWindowLong(System.IntPtr hWnd, int nIndex, int dwNewLong);
         }
-
-        private bool HasBitmapChanged(Bitmap bmp, double threshold = 0.01)
-        {
-            if (_lastBmp == null) return true;
-            if (bmp.Width != _lastBmp.Width || bmp.Height != _lastBmp.Height) return true;
-
-            int changedPixels = 0;
-            int totalSamples = 0;
-
-            for (int x = 0; x < bmp.Width; x += 50)
-            {
-                for (int y = 0; y < bmp.Height; y += 50)
-                {
-                    totalSamples++;
-                    if (bmp.GetPixel(x, y) != _lastBmp.GetPixel(x, y))
-                        changedPixels++;
-                }
-            }
-
-            return ((double)changedPixels / totalSamples) >= threshold;
-        }
-
     }
 }

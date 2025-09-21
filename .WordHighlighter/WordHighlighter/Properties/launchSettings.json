@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WordHighlighter": {
+      "commandName": "Project",
+      "commandLineArgs": "\"Godot\" \"Spieler,Sprung\""
+    }
+  }
+}

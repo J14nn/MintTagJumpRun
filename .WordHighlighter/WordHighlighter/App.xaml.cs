@@ -8,6 +8,7 @@ namespace WordHighlighter
     public partial class App : Application
     {
         private CancellationTokenSource _cts = new();
+        OverlayWindow _overlayWindow;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -33,8 +34,8 @@ namespace WordHighlighter
                                   .Select(w => w.Trim())
                                   .ToList();
 
-            var overlay = new OverlayWindow(targetWindowKeyword, words);
-            overlay.Show();
+            _overlayWindow = new OverlayWindow(targetWindowKeyword, words);
+            _overlayWindow.Show();
 
             StartFileMonitor();
         }
@@ -52,10 +53,19 @@ namespace WordHighlighter
                         if (File.Exists(filePath))
                         {
                             string content = File.ReadAllText(filePath).Trim().ToLowerInvariant();
-                            if (content == "close")
+                            if (!string.IsNullOrEmpty(content))
                             {
-                                Dispatcher.Invoke(Shutdown);
-                                return;
+                                File.WriteAllText(filePath, string.Empty);
+
+                                if (content == "close")
+                                {
+                                    Dispatcher.Invoke(Shutdown);
+                                    return;
+                                }
+                                else if (content == "search")
+                                {
+                                    _overlayWindow.Dispatcher.Invoke(() => _overlayWindow.PollForWord());
+                                }
                             }
                         }
                     }
