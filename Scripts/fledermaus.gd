@@ -23,7 +23,7 @@ func _ready():
 	add_to_group("Gegner")
 	$FledermausSprite.animation_finished.connect(_animation_fertig)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Global.gegner_getroffen.has(self):
 		Global.gegner_getroffen.erase(self)
 		Leben -= 1

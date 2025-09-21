@@ -15,7 +15,7 @@ func _ready():
 	add_to_group("Gegner")
 	$SlimeSprite.animation_finished.connect(_animation_fertig)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Global.gegner_getroffen.has(self) and Leben > 0:
 		Leben -= 1
 		Global.gegner_getroffen.erase(self)
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		else:
 			$SlimeSprite.play("schaden")
 			kriegt_schaden = true
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Leben == 0 or kriegt_schaden:
 		return;
 		
