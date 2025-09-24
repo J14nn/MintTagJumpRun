@@ -165,7 +165,7 @@ animations = [{
 size = Vector2(28, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3r674"]
-size = Vector2(28, 20)
+size = Vector2(30, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jb64b"]
 radius = 63.0079
@@ -179,8 +179,6 @@ script = ExtResource("1_jb64b")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_re0op")
 animation = &"angreifen"
-frame = 3
-frame_progress = 1.0
 
 [node name="FledermausKollision" type="CollisionShape2D" parent="."]
 position = Vector2(4, 14)

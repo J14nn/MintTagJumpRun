@@ -13,9 +13,11 @@ var fly_velocity: Vector2 = Vector2.ZERO
 var fly_speed: float = 300
 var fly_timer: float = 0.0
 var fly_change_interval: float = 0.2  
+var spawn: Vector2
 
 func _ready():
 	$SpielerSprite.animation_finished.connect(_animation_fertig)
+	spawn = position
 	
 func Spring ():
 	var Sprunghoehe: float = 140
@@ -86,8 +88,7 @@ func _physics_process(delta):
 func respawn():
 	Global.tot = false
 	gestorben = false
-	var main_scene_path = "res://Scenes/Main.tscn"
-	get_tree().change_scene_to_file(main_scene_path)
+	position = spawn
 	
 func _input(event):
 	if Global.tot:

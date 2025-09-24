@@ -53,13 +53,12 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if player_in_range and player_ref:
-		flip = player_ref.global_position.x > global_position.x
+		var new_flip = player_ref.global_position.x > global_position.x
+		if new_flip != flip:
+			flip = new_flip
+			_flip()
 
 	var richtung = Vector2.RIGHT if flip else Vector2.LEFT
-
-	if $EdgeCheck:
-		$EdgeCheck.position.x = 35 if flip else -18
-		$EdgeCheck.target_position = Vector2(0, 16)
 
 	var can_move_forward = true
 	if $EdgeCheck:
@@ -70,7 +69,7 @@ func _physics_process(_delta: float) -> void:
 		charge_timer = ChargeDuration
 		laufen = false
 
-	if charging:
+	if charging and can_move_forward:
 		velocity = richtung * ChargeSpeed * Geschwindigkeit
 		charge_timer -= _delta
 		if charge_timer <= 0:
@@ -85,6 +84,7 @@ func _physics_process(_delta: float) -> void:
 				velocity = Vector2.ZERO
 				if not ledge_locked:
 					flip = !flip
+					_flip()
 					ledge_locked = true
 					ledge_lock_time = 0.2
 
@@ -96,8 +96,19 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	_update_animation()
 
-func _update_animation():
+func _flip():
 	$BossSprite.flip_h = flip
+	
+	if $EdgeCheck:
+		$EdgeCheck.position.x = 72 if flip else -60
+		$EdgeCheck.target_position = Vector2(0, 16)
+	
+	if $DamageArea:
+		$DamageArea/CollisionShape2D.position.x = -7 if flip else 8
+	if $BossKollision:
+		$BossKollision.position.x = -7 if flip else 8
+
+func _update_animation():
 	if tot:
 		return
 	elif charging:
@@ -127,6 +138,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func _on_timer_timeout() -> void:
 	if !player_in_range and !charging and !kriegt_schaden and !tot:
 		flip = !flip
+		_flip() 
 
 func _on_damage_area_area_entered(_area: Area2D) -> void:
 	if charging and MachtSchaden:

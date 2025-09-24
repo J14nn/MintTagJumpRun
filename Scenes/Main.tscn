@@ -768,7 +768,7 @@ LabelText = "[p]Der Spieler springt zu niedrig.[/p][p]1. Klicke im Szenenbaum au
 WordsToFind = "Spieler, Sprunghoehe:"
 
 [node name="Spieler" parent="." instance=ExtResource("2_uu6xs")]
-position = Vector2(63, 622)
+position = Vector2(68, 622)
 metadata/locked_permanently = true
 metadata/_edit_lock_ = true
 

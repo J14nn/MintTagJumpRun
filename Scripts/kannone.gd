@@ -7,6 +7,7 @@ func _ready() -> void:
 	$FeuerTimer.wait_time = Schuss_intervall
 
 func Schießen() -> void:
+	$FeuerTimer.wait_time = Schuss_intervall
 	$KannoneSprite.play("Feuer")
 	var schuss = Schuss.instantiate()
 	get_tree().current_scene.add_child(schuss)
