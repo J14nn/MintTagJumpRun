@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "WordHighlighter": {
-      "commandName": "Project",
-      "commandLineArgs": "\"Spieler,Sprung\" \"C:\\\\Users\\\\Jan\\\\Documents\\\\Ferber-MintTag\\\\.Wordhighlighter_Release\\\\config.json\""
-    }
-  }
-}
