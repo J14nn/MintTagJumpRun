@@ -135,5 +135,5 @@ func _on_timer_timeout() -> void:
 		_flip() 
 
 func _on_damage_area_area_entered(_area: Area2D) -> void:
-	if charging and MachtSchaden:
+	if charging and MachtSchaden and not Global.tot:
 		Global.tot = true

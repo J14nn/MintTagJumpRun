@@ -10,6 +10,9 @@ func _on_body_entered(body: Node) -> void:
 	if body.name == "Spieler":
 		Global.tot = true
 		queue_free()
+	elif body.name == "Boss":
+		Global.BossHit = true
+		queue_free()
 	elif not body.name.begins_with("Kannone"):
 		queue_free()
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:

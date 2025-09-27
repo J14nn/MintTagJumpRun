@@ -17,6 +17,8 @@ var fly_speed: float = 300
 var fly_timer: float = 0.0
 var fly_change_interval: float = 0.2  
 var spawn: Vector2
+var coyote_time: float = 0.15
+var coyote_time_left: float = 0.0
 
 func _ready():
 	$SpielerSprite.animation_finished.connect(_animation_fertig)
@@ -45,22 +47,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta):
 	if Global.win:
-		if not flying_random:
-			flying_random = true
-			fly_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * fly_speed
-			fly_timer = fly_change_interval
-
-		fly_timer -= delta
-		if fly_timer <= 0:
-			fly_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * fly_speed
-			fly_timer = fly_change_interval
-
-		var jitter = Vector2(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5)) * 50
-		fly_velocity += jitter
-		fly_velocity = fly_velocity.limit_length(fly_speed)
-
-		position += fly_velocity * delta
-		$SpielerSprite.play("FlyAround")
+		winMovement(delta)
 		return
 
 	if Global.tot:
@@ -69,12 +56,21 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 		
+	if is_on_floor():
+		coyote_time_left = coyote_time
+	else:
+		coyote_time_left = max(coyote_time_left - delta, 0.0)
+		
 	if Global.klettert:
 		if Input.is_action_pressed("ui_up"):
-			velocity.x = 0
 			gravitation = 0
 			geschwindigkeit = 50
 			velocity.y = -100
+			$SpielerSprite.play("klettern_seite")
+		elif Input.is_action_pressed("ui_down"):
+			gravitation = 0
+			geschwindigkeit = 50
+			velocity.y = +100
 			$SpielerSprite.play("klettern_seite")
 	else:
 		gravitation = default_gravitation
@@ -121,8 +117,9 @@ func _input(event):
 
 		angriffs_index = 1 - angriffs_index
 
-	if event.is_action_pressed("ui_jump") and is_on_floor():
+	if event.is_action_pressed("ui_jump") and coyote_time_left > 0.0:
 		Spring()
+		coyote_time_left = 0.0 
 
 func horizontal_bewegung():
 	var horizontal_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -166,3 +163,21 @@ func _update_internal_value(v: float) -> float:
 	if v > 200.0:
 		return 200.0
 	return v
+	
+func winMovement(delta) -> void:
+	if not flying_random:
+		flying_random = true
+		fly_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * fly_speed
+		fly_timer = fly_change_interval
+
+	fly_timer -= delta
+	if fly_timer <= 0:
+		fly_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * fly_speed
+		fly_timer = fly_change_interval
+
+	var jitter = Vector2(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5)) * 50
+	fly_velocity += jitter
+	fly_velocity = fly_velocity.limit_length(fly_speed)
+
+	position += fly_velocity * delta
+	$SpielerSprite.play("FlyAround")

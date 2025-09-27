@@ -60,7 +60,7 @@ func _animation_fertig():
 		angriff = false
 		laufen = true
 
-		if pending_attack_check and player_in_range:
+		if pending_attack_check and player_in_range and not Global.tot:
 			Global.tot = true
 		pending_attack_check = false
 		

@@ -114,7 +114,7 @@ func _animation_fertig():
 		laufen = false
 		pending_attack_check = false
 
-		if player_in_range:
+		if player_in_range and not Global.tot:
 			Global.tot = true
 		
 		in_knockback = true
