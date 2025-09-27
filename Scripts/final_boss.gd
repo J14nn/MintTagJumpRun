@@ -15,6 +15,7 @@ var player_ref: Node2D = null
 var tot: bool = false
 var charging: bool = false
 var charge_timer: float = 5
+var can_move_forward = true
 
 var ledge_locked: bool = false
 var ledge_lock_time: float = 0.3
@@ -60,11 +61,10 @@ func _physics_process(_delta: float) -> void:
 
 	var richtung = Vector2.RIGHT if flip else Vector2.LEFT
 
-	var can_move_forward = true
 	if $EdgeCheck:
 		can_move_forward = $EdgeCheck.is_colliding()
 
-	if player_in_range and not charging and not kriegt_schaden:
+	if player_in_range and not charging and not kriegt_schaden and can_move_forward:
 		charging = true
 		charge_timer = ChargeDuration
 		laufen = false
@@ -77,21 +77,13 @@ func _physics_process(_delta: float) -> void:
 			laufen = true
 			velocity = Vector2.ZERO
 	else:
-		if laufen:
+		if laufen or charging:
 			if can_move_forward:
 				velocity = richtung * Geschwindigkeit
 			else:
 				velocity = Vector2.ZERO
-				if not ledge_locked:
-					flip = !flip
-					_flip()
-					ledge_locked = true
-					ledge_lock_time = 0.2
-
-	if ledge_locked:
-		ledge_lock_time -= _delta
-		if ledge_lock_time <= 0:
-			ledge_locked = false
+				flip = !flip
+				_flip()
 
 	move_and_slide()
 	_update_animation()
@@ -107,6 +99,8 @@ func _flip():
 		$DamageArea/CollisionShape2D.position.x = -7 if flip else 8
 	if $BossKollision:
 		$BossKollision.position.x = -7 if flip else 8
+	if $Area2D/CollisionShape2D:
+		$Area2D/CollisionShape2D.position.x = 30 if flip else -30
 
 func _update_animation():
 	if tot:
@@ -126,7 +120,7 @@ func _animation_fertig():
 		kriegt_schaden = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "Spieler" and Treffer < 3:
+	if body.name == "Spieler" and Treffer < 3 and can_move_forward:
 		player_in_range = true
 		player_ref = body		
 

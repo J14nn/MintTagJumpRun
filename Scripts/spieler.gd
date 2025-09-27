@@ -4,6 +4,9 @@ extends CharacterBody2D
 @export var gravitation: float = 400
 @export var fall_multiplier: float = 2.5
 
+var default_gravitation: float
+var default_speed: float
+
 var angriffs_index: int = 0 
 var gestorben: bool = false;
 var gegner_im_bereich: Array[Node2D] = []
@@ -18,6 +21,8 @@ var spawn: Vector2
 func _ready():
 	$SpielerSprite.animation_finished.connect(_animation_fertig)
 	spawn = position
+	default_gravitation = gravitation
+	default_speed = geschwindigkeit
 	
 func Spring ():
 	var Sprunghoehe: float = 140
@@ -63,15 +68,26 @@ func _physics_process(delta):
 		velocity.x = 0
 		move_and_slide()
 		return
+		
+	if Global.klettert:
+		if Input.is_action_pressed("ui_up"):
+			velocity.x = 0
+			gravitation = 0
+			geschwindigkeit = 50
+			velocity.y = -100
+			$SpielerSprite.play("klettern_seite")
+	else:
+		gravitation = default_gravitation
+		geschwindigkeit = default_speed
 
 	if velocity.y > 0:
 		velocity.y += gravitation * fall_multiplier * delta
 	else:  
 		velocity.y += gravitation * delta
 			
-	var y = gravitation * delta
-	velocity.y += y
-
+	if velocity.y < 0.0 and not Input.is_action_pressed("ui_jump"):
+		velocity.y = move_toward(velocity.y, 0.0, delta * 1200.0)
+		
 	if Global.angreift:
 		velocity.x = 0
 	else:
@@ -107,23 +123,6 @@ func _input(event):
 
 	if event.is_action_pressed("ui_jump") and is_on_floor():
 		Spring()
-
-	if Global.klettert:
-		if event.is_action_pressed("ui_up"):
-			$SpielerSprite.play("klettern_seite")
-			velocity.y = -50
-			gravitation = 0
-			geschwindigkeit = 50
-		elif event.is_action_pressed("ui_down"):
-			$SpielerSprite.play("klettern_seite")
-			velocity.y = 50
-			gravitation = 0
-			geschwindigkeit = 50
-		elif event.is_action_released("ui_up") or event.is_action_released("ui_down"):
-			velocity.y = 0
-	else:
-		gravitation = 200
-		geschwindigkeit = 150
 
 func horizontal_bewegung():
 	var horizontal_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
