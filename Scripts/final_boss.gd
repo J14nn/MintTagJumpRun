@@ -2,9 +2,11 @@ extends CharacterBody2D
 @export var ZielScene: PackedScene
 @export var MachtSchaden: bool = true
 @export var Geschwindigkeit: float = 50
+@export var gravitation: float = 400
+@export var fall_multiplier: float = 2.5
 
 var ChargeSpeed: float = 2
-var ChargeDuration: float = 0.5
+var ChargeDuration: float = 3
 var Treffer: int = 0
 var angriff: bool = false
 var laufen: bool = true
@@ -48,10 +50,17 @@ func _process(_delta: float) -> void:
 			$BossSprite.play("schaden")
 			kriegt_schaden = true
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Treffer >= 3 or kriegt_schaden or tot:
 		velocity = Vector2.ZERO
+		move_and_slide()
 		return
+
+	# Gravity
+	if velocity.y > 0:
+		velocity.y += gravitation * fall_multiplier * delta
+	else:
+		velocity.y += gravitation * delta
 
 	if player_in_range and player_ref:
 		var new_flip = player_ref.global_position.x > global_position.x
@@ -62,7 +71,10 @@ func _physics_process(_delta: float) -> void:
 	var richtung = Vector2.RIGHT if flip else Vector2.LEFT
 
 	if $EdgeCheck:
-		can_move_forward = $EdgeCheck.is_colliding()
+		if charging:
+			can_move_forward = true
+		else:
+			can_move_forward = $EdgeCheck.is_colliding()
 
 	if player_in_range and not charging and not kriegt_schaden and can_move_forward:
 		charging = true
@@ -70,18 +82,18 @@ func _physics_process(_delta: float) -> void:
 		laufen = false
 
 	if charging and can_move_forward:
-		velocity = richtung * ChargeSpeed * Geschwindigkeit
-		charge_timer -= _delta
+		velocity.x = richtung.x * ChargeSpeed * Geschwindigkeit
+		charge_timer -= delta
 		if charge_timer <= 0:
 			charging = false
 			laufen = true
-			velocity = Vector2.ZERO
+			velocity.x = 0
 	else:
 		if laufen or charging:
 			if can_move_forward:
-				velocity = richtung * Geschwindigkeit
+				velocity.x = richtung.x * Geschwindigkeit
 			else:
-				velocity = Vector2.ZERO
+				velocity.x = 0
 				flip = !flip
 				_flip()
 
