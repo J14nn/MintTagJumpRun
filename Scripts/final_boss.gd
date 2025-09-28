@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var fall_multiplier: float = 2.5
 
 var ChargeSpeed: float = 2
-var ChargeDuration: float = 3
+var ChargeDuration: float = 1.3
 var Treffer: int = 0
 var angriff: bool = false
 var laufen: bool = true
