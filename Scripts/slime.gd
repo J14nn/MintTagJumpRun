@@ -10,23 +10,25 @@ var flip: bool = false
 var player_in_range: bool = false
 var pending_attack_check: bool = false
 var player_ref: Node2D = null
+var tot : bool = false
 
 func _ready():
 	add_to_group("Gegner")
 	$SlimeSprite.animation_finished.connect(_animation_fertig)
 	
 func _process(_delta: float) -> void:
-	if Global.gegner_getroffen.has(self) and Leben > 0:
+	if Global.gegner_getroffen.has(self) and not tot:
 		Leben -= 1
 		Global.gegner_getroffen.erase(self)
 		if Leben <= 0 and $SlimeKollision != null:
+			tot = true
 			$SlimeKollision.queue_free()
 			$SlimeSprite.play("sterben")
 		else:
 			$SlimeSprite.play("schaden")
 			kriegt_schaden = true
 func _physics_process(_delta):
-	if Leben == 0 or kriegt_schaden:
+	if tot or kriegt_schaden:
 		return;
 		
 	if player_in_range and player_ref:
@@ -68,7 +70,7 @@ func _animation_fertig():
 		kriegt_schaden = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "Spieler" and Leben > 0:
+	if body.name == "Spieler" and not tot:
 		player_in_range = true
 		player_ref = body
 
